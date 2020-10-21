@@ -5,7 +5,7 @@ import graphviz
 from issue import Issue
 
 class JiraCache(object):
-    def __init__(self, user, pwd, jira_base="https://jira.etas-dev.com/rest/"):
+    def __init__(self, user, pwd, jira_base="https://myjiraurl/rest/"):
         self.__cache = {}
         self.__session = requests.Session()
         self.__session.stream = True
