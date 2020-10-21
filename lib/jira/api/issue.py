@@ -38,12 +38,12 @@ class Issue(object):
             return
 
         if "cross_links" in iss.keys():
-            return #We already built cross-links
+            return iss#We already built cross-links
 
         cross_links["blocked_by"] = [i for i in iss['fields']['issuelinks'] if i['type']['inward'] == "is blocked by"]
         cross_links["blocks"] = [i for i in iss['fields']['issuelinks'] if i['type']['inward'] == "blocks"]
         cross_links["parent_of"] = [i for i in issue_resp['fields']['issuelinks'] if i['type']['inward'] == 'is child of']
-        cross_links["child of"] = [i for i in issue_resp['fields']['issuelinks'] if i['type']['inward'] == 'is parent of']
+        cross_links["child_of"] = [i for i in issue_resp['fields']['issuelinks'] if i['type']['inward'] == 'is parent of']
 
         cross_links["contained_in_epic"] = []
         if 'customfield_10005' in iss.keys() and len(issue_resp['customfield_10005'])>0:
@@ -70,3 +70,5 @@ class Issue(object):
 
         for k in keylist:
             self.spider_issue(k,fields,expand,properties,updateHistory)
+
+        return iss
